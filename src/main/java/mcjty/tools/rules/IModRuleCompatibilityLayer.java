@@ -71,6 +71,12 @@ public interface IModRuleCompatibilityLayer {
     // --------------------
 
     boolean hasEnigmaScript();
+    
+    // --------------------
+    // CustomInvasions
+    // --------------------
+    
+    String getInvasion(World world);
 
     void setPlayerState(EntityPlayer player, String statename, String statevalue);
 
