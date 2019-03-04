@@ -260,6 +260,13 @@ public class CommonRuleEvaluator {
                 logger.warn("Baubles is missing: this test cannot work!");
             }
         }
+        if (map.has(INVASION)) {
+            if (compatibility.hasCustomInvasions()) {
+                addInvasionCheck(map);
+            } else {
+                logger.warn("CustomInvasions is missing: this test cannot work!");
+            }
+        }
         if (map.has(HEAD)) {
             if (compatibility.hasBaubles()) {
                 addBaubleCheck(map, HEAD, compatibility::getHeadSlots);
@@ -1140,5 +1147,27 @@ public class CommonRuleEvaluator {
             }
             return false;
         });
+    }
+
+    private void addInvasionCheck(AttributeMap map) {
+        List<String> invasions = map.getList(INVASION);
+        if (invasions.size() == 1) {
+            String invasion = invasions.get(0);
+            checks.add((event,query) -> {
+                String activeInvasion = compatibility.getInvasion(query.getWorld(event));
+                if (invasion.equals(activeInvasion)) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+        } else {
+            Set<String> biomenames = new HashSet<>(invasions);
+            checks.add((event,query) -> {
+                String activeInvasion = compatibility.getInvasion(query.getWorld(event));
+                return biomenames.contains(activeInvasion);
+            });
+        }
     }
 }

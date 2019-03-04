@@ -75,6 +75,8 @@ public interface IModRuleCompatibilityLayer {
     // --------------------
     // CustomInvasions
     // --------------------
+
+    boolean hasCustomInvasions();
     
     String getInvasion(World world);
 

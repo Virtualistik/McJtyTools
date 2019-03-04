@@ -56,6 +56,8 @@ public interface CommonRuleKeys {
     Key<String> BODY = Key.create(Type.JSON, "body");
     Key<String> CHARM = Key.create(Type.JSON, "charm");
 
+    Key<String> INVASION = Key.create(Type.STRING, "invasion");
+
     Key<String> STATE = Key.create(Type.STRING, "state");
     Key<String> PSTATE = Key.create(Type.STRING, "pstate");
 
